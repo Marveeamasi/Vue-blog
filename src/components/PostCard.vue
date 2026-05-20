@@ -1,18 +1,14 @@
 <template>
   <article class="post-card">
-    <!-- Featured Image -->
-    <div class="post-card__image-wrap">
+    <!-- Featured Image: only rendered when non-null and not broken -->
+    <div v-if="showImage" class="post-card__image-wrap">
       <img
-        v-if="post.featuredImage"
         :src="post.featuredImage"
         :alt="post.title"
         class="post-card__image"
         loading="lazy"
         @error="imageError = true"
       />
-      <div v-else class="post-card__image-placeholder">
-        <span class="post-card__placeholder-icon">✦</span>
-      </div>
     </div>
 
     <div class="post-card__body">
@@ -56,16 +52,24 @@ const props = defineProps({
 
 const imageError = ref(false)
 
+// Only show image if featuredImage is a non-empty string and hasn't errored
+const showImage = computed(() => {
+  return !imageError.value &&
+    typeof props.post.featuredImage === 'string' &&
+    props.post.featuredImage.trim() !== ''
+})
+
 const excerpt = computed(() => {
   if (props.post.excerpt) return props.post.excerpt
-  // Strip HTML tags and truncate
+  if (!props.post.content) return ''
   const text = props.post.content.replace(/<[^>]*>/g, '')
   return text.length > 180 ? text.slice(0, 180).trim() + '…' : text
 })
 
 function formatDate(dateStr) {
   if (!dateStr) return ''
-  const d = new Date(dateStr)
-  return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
+  return new Date(dateStr).toLocaleDateString('en-US', {
+    year: 'numeric', month: 'long', day: 'numeric'
+  })
 }
 </script>
