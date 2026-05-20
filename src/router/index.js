@@ -10,20 +10,20 @@ const routes = [
     path: '/',
     name: 'Home',
     component: HomeView,
-    meta: { title: 'Vue Blog — Home' }
+    meta: { title: "Edy's Blog — Home" }
   },
   {
     path: '/posts/:id',
     name: 'PostDetail',
     component: PostDetailView,
-    meta: { title: 'Vue Blog — Post' }
+    meta: { title: "Edy's Blog — Post" }
   },
   {
     // Catch-all 404 route — must be last
     path: '/:pathMatch(.*)*',
     name: 'NotFound',
     component: NotFoundView,
-    meta: { title: 'Vue Blog — Page Not Found' }
+    meta: { title: "Edy's Blog — Page Not Found" }
   }
 ]
 
@@ -38,7 +38,7 @@ const router = createRouter({
 
 // Update document title on each navigation
 router.afterEach((to) => {
-  document.title = to.meta.title || 'Vue Blog'
+  document.title = to.meta.title || "Edy's Blog"
 })
 
 export default router
