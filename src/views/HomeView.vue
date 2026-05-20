@@ -8,21 +8,32 @@
 
         <!-- Search -->
         <form class="search-form" @submit.prevent="handleSearch">
-          <input
-            v-model="searchQuery"
-            type="search"
-            placeholder="Search posts…"
-            class="search-form__input"
-            aria-label="Search posts"
-          />
-          <button type="submit" class="search-form__btn btn btn--primary">Search</button>
-          <button
-            v-if="activeSearch"
-            type="button"
-            class="search-form__btn btn btn--ghost"
-            @click="clearSearch"
-          >
-            Clear
+          <div class="search-form__field">
+            <svg class="search-form__icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+            </svg>
+            <input
+              v-model="searchQuery"
+              type="search"
+              placeholder="Search posts…"
+              class="search-form__input"
+              aria-label="Search posts"
+              @keyup.escape="clearSearch"
+            />
+            <button
+              v-if="searchQuery"
+              type="button"
+              class="search-form__clear"
+              aria-label="Clear search"
+              @click="clearSearch"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 6 6 18M6 6l12 12"/>
+              </svg>
+            </button>
+          </div>
+          <button type="submit" class="search-form__submit">
+            Search
           </button>
         </form>
       </div>
@@ -36,7 +47,7 @@
         <span v-if="meta"> — {{ meta.total }} post{{ meta.total === 1 ? '' : 's' }} found</span>
       </p>
 
-      <!-- Loading skeletons (Suspense-like UX with SkeletonCard) -->
+      <!-- Loading skeletons -->
       <div v-if="loading" class="posts-grid">
         <SkeletonCard v-for="n in 9" :key="n" />
       </div>
