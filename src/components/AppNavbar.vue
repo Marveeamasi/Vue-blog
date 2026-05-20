@@ -2,7 +2,7 @@
   <header class="navbar">
     <div class="navbar__inner container">
       <RouterLink to="/" class="navbar__brand">
-        <span class="navbar__logo">💯</span>
+        <span class="navbar__logo">🦜</span>
         <span class="navbar__name">Edy's Blog</span>
       </RouterLink>
 
