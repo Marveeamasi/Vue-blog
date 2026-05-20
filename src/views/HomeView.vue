@@ -3,7 +3,7 @@
     <!-- Hero -->
     <section class="hero">
       <div class="container">
-        <h1 class="hero__title">Vue Blog</h1>
+        <h1 class="hero__title">Edy's Blog</h1>
         <p class="hero__subtitle">Thoughts, stories and ideas from the community</p>
 
         <!-- Search -->
